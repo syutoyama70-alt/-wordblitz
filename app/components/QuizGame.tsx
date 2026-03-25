@@ -231,8 +231,10 @@ export default function QuizGame({
 
   const livesLeft = hardMode ? Math.max(0, lives === Infinity ? MAX_LIVES : lives) : 0;
 
+  const bgClass = xp >= 200 ? "bg-level-max" : xp >= 100 ? "bg-level-3" : xp >= 50 ? "bg-level-2" : "bg-level-1";
+
   return (
-    <div className="min-h-screen bg-gray-900 text-white flex flex-col items-center px-4 py-6 relative overflow-hidden">
+    <div className={`min-h-screen ${bgClass} text-white flex flex-col items-center px-4 py-6 relative overflow-hidden transition-all duration-1000`}>
 
       {/* フラッシュ */}
       {flashColor && (

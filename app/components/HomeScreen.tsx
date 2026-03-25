@@ -1,5 +1,5 @@
 "use client";
-import { useState } from "react";
+import { useState, useEffect, useCallback } from "react";
 import { Word } from "@/app/types";
 
 export interface QuizSettings {
@@ -36,14 +36,37 @@ export default function HomeScreen({
   const [difficulty, setDifficulty] = useState<1 | 2 | 3>((level as 1 | 2 | 3) ?? 1);
   const xpInLevel = xp % XP_PER_LEVEL;
 
+  // ネオン電撃スパーク
+  const [bolts, setBolts] = useState<number[]>([]);
+  const spawnBolt = useCallback(() => {
+    const id = Date.now();
+    setBolts((prev) => [...prev, id]);
+    setTimeout(() => setBolts((prev) => prev.filter((b) => b !== id)), 420);
+  }, []);
+  useEffect(() => {
+    spawnBolt();
+    const interval = setInterval(spawnBolt, 3500);
+    return () => clearInterval(interval);
+  }, [spawnBolt]);
+
+  // レベルに応じた背景クラス
+  const bgClass = xp >= 200 ? "bg-level-max" : xp >= 100 ? "bg-level-3" : xp >= 50 ? "bg-level-2" : "bg-level-1";
+
   return (
-    <div className="min-h-screen bg-gray-900 text-white flex flex-col items-center px-4 py-10">
+    <div className={`min-h-screen ${bgClass} text-white flex flex-col items-center px-4 py-10 transition-all duration-1000`}>
       {/* Title */}
-      <div className="mb-6 text-center">
-        <h1 className="text-4xl font-black tracking-tight bg-gradient-to-r from-indigo-400 to-purple-400 bg-clip-text text-transparent">
+      <div className="mb-6 text-center relative">
+        {/* 電撃スパーク */}
+        {bolts.map((id) => (
+          <span key={id} className="animate-bolt absolute text-yellow-300 text-2xl select-none pointer-events-none"
+            style={{ top: `${Math.random() * 40 - 10}px`, left: `${20 + Math.random() * 60}%` }}>
+            ⚡
+          </span>
+        ))}
+        <h1 className="animate-neon-logo text-5xl font-black tracking-tight">
           WordBlitz
         </h1>
-        <p className="text-gray-400 mt-1 text-sm">1秒英単語クイズ</p>
+        <p className="text-gray-400 mt-1 text-sm tracking-widest uppercase">Speed Word Quiz</p>
       </div>
 
       {/* Streak バナー */}
