@@ -203,6 +203,17 @@ export default function ResultScreen({
         </div>
       )}
 
+      {/* ── アフィリエイト ── */}
+      <div className="w-full max-w-sm mb-4 text-center">
+        <p className="text-xs text-gray-500 mb-2">英語力をもっと伸ばすなら👇</p>
+        <div className="flex justify-center">
+          <a href="https://px.a8.net/svt/ejp?a8mat=4AZOWS+9QOC36+1SVU+674EP" rel="nofollow" target="_blank">
+            <img width={120} height={60} alt="" src="https://www28.a8.net/svt/bgt?aid=260326108589&wid=001&eno=01&mid=s00000008409001041000&mc=1" className="rounded-lg border-0" />
+          </a>
+        </div>
+        <img width={1} height={1} src="https://www12.a8.net/0.gif?a8mat=4AZOWS+9QOC36+1SVU+674EP" alt="" style={{ display: "block" }} />
+      </div>
+
       {/* ── アクションボタン ── */}
       <div className="w-full max-w-sm space-y-3">
         <button
