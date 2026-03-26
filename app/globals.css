@@ -1,8 +1,8 @@
 @import "tailwindcss";
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --background: #030712;
+  --foreground: #f1f5f9;
 }
 
 @theme inline {
@@ -12,62 +12,46 @@
   --font-mono: var(--font-geist-mono);
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
-}
-
 body {
   background: var(--background);
   color: var(--foreground);
   font-family: Arial, Helvetica, sans-serif;
 }
 
+/* ── Float / Shake ── */
 @keyframes floatUp {
   0%   { opacity: 1; transform: translateY(0) scale(1); }
   60%  { opacity: 1; transform: translateY(-40px) scale(1.1); }
   100% { opacity: 0; transform: translateY(-80px) scale(0.9); }
 }
-
 @keyframes shake {
   0%, 100% { transform: translateX(0); }
-  15%       { transform: translateX(-10px); }
-  30%       { transform: translateX(10px); }
-  45%       { transform: translateX(-8px); }
-  60%       { transform: translateX(8px); }
-  75%       { transform: translateX(-4px); }
-  90%       { transform: translateX(4px); }
+  15%  { transform: translateX(-10px); }
+  30%  { transform: translateX(10px); }
+  45%  { transform: translateX(-8px); }
+  60%  { transform: translateX(8px); }
+  75%  { transform: translateX(-4px); }
+  90%  { transform: translateX(4px); }
 }
+.animate-float-up { animation: floatUp 0.9s ease-out forwards; }
+.animate-shake    { animation: shake 0.45s ease-in-out; }
 
-.animate-float-up {
-  animation: floatUp 0.9s ease-out forwards;
-}
-
-.animate-shake {
-  animation: shake 0.45s ease-in-out;
-}
-
-/* ── WordBlitz ネオン電撃ロゴ ── */
+/* ── WordBlitz ネオンロゴ ── */
 @keyframes neonFlicker {
   0%   { text-shadow: 0 0 8px #a78bfa, 0 0 20px #7c3aed, 0 0 40px #4f46e5; opacity: 1; }
   3%   { text-shadow: none; opacity: 0.8; }
   6%   { text-shadow: 0 0 8px #a78bfa, 0 0 20px #7c3aed, 0 0 40px #4f46e5; opacity: 1; }
-  48%  { text-shadow: 0 0 8px #a78bfa, 0 0 20px #7c3aed, 0 0 40px #4f46e5; opacity: 1; }
   50%  { text-shadow: 0 0 16px #c4b5fd, 0 0 40px #7c3aed, 0 0 80px #4f46e5, 0 0 2px #fff; opacity: 1; }
   52%  { text-shadow: none; opacity: 0.75; }
   54%  { text-shadow: 0 0 8px #a78bfa, 0 0 20px #7c3aed; opacity: 1; }
   100% { text-shadow: 0 0 8px #a78bfa, 0 0 20px #7c3aed, 0 0 40px #4f46e5; opacity: 1; }
 }
-
 @keyframes boltSpark {
   0%   { opacity: 0; transform: scaleX(0.2) translateY(-2px); }
   20%  { opacity: 1; transform: scaleX(1) translateY(0); }
   60%  { opacity: 0.6; transform: scaleX(0.8) translateY(1px); }
   100% { opacity: 0; transform: scaleX(0) translateY(-1px); }
 }
-
 .animate-neon-logo {
   animation: neonFlicker 3.5s infinite;
   background: linear-gradient(90deg, #818cf8, #a78bfa, #c4b5fd, #818cf8);
@@ -76,13 +60,88 @@ body {
   background-clip: text;
   -webkit-text-fill-color: transparent;
 }
+.animate-bolt { animation: boltSpark 0.4s ease-out forwards; }
 
-.animate-bolt {
-  animation: boltSpark 0.4s ease-out forwards;
+/* ── PlayerCrest Animations ── */
+@keyframes crest-pulse {
+  0%, 100% { opacity: 0.5; transform: scale(0.98); }
+  50%       { opacity: 1;   transform: scale(1.04); }
+}
+@keyframes crest-spin {
+  from { transform: rotate(0deg); }
+  to   { transform: rotate(360deg); }
+}
+@keyframes orbit-1 {
+  from { transform: rotate(0deg)   translateX(76px) rotate(0deg); }
+  to   { transform: rotate(360deg) translateX(76px) rotate(-360deg); }
+}
+@keyframes orbit-2 {
+  from { transform: rotate(120deg)  translateX(76px) rotate(-120deg); }
+  to   { transform: rotate(480deg)  translateX(76px) rotate(-480deg); }
+}
+@keyframes orbit-3 {
+  from { transform: rotate(240deg)  translateX(76px) rotate(-240deg); }
+  to   { transform: rotate(600deg)  translateX(76px) rotate(-600deg); }
+}
+@keyframes rainbow-shift {
+  0%   { filter: hue-rotate(0deg)   brightness(1.1); }
+  50%  { filter: hue-rotate(180deg) brightness(1.3); }
+  100% { filter: hue-rotate(360deg) brightness(1.1); }
+}
+@keyframes tier-up-flash {
+  0%   { opacity: 0; transform: scale(0.5); }
+  40%  { opacity: 1; transform: scale(1.2); }
+  70%  { opacity: 1; transform: scale(1); }
+  100% { opacity: 0; transform: scale(1.1); }
+}
+.animate-tier-up { animation: tier-up-flash 1.6s ease-out forwards; }
+
+/* ── Tier Backgrounds ── */
+/* Stone: 洗練されたダーク */
+.bg-tier-0 {
+  background: #030712;
+}
+/* Iron: スチール感 */
+.bg-tier-1 {
+  background: linear-gradient(180deg, #0f172a 0%, #0d1520 100%);
+}
+/* Bronze: 暖かみのあるダーク */
+.bg-tier-2 {
+  background:
+    radial-gradient(ellipse 70% 35% at 50% 0%, #2d1500 0%, transparent 70%),
+    #030712;
+}
+/* Silver: クールブルー */
+.bg-tier-3 {
+  background:
+    radial-gradient(ellipse 70% 35% at 50% 0%, #0c1e3d 0%, transparent 70%),
+    #030712;
+}
+/* Gold: ディープパープル×ゴールド */
+.bg-tier-4 {
+  background:
+    radial-gradient(ellipse 70% 35% at 50% 0%, #2a0e5e 0%, transparent 65%),
+    radial-gradient(ellipse 40% 20% at 50% 0%, #3d1e00 0%, transparent 50%),
+    #030712;
+}
+/* Platinum: オーロラ */
+.bg-tier-5 {
+  background:
+    radial-gradient(ellipse 60% 30% at 20% 0%, #062840 0%, transparent 60%),
+    radial-gradient(ellipse 60% 30% at 80% 0%, #1a0050 0%, transparent 60%),
+    #030712;
+}
+/* Diamond: ミステリアスレインボー */
+.bg-tier-6 {
+  background:
+    radial-gradient(ellipse 50% 25% at 20% 0%, #2d0060 0%, transparent 55%),
+    radial-gradient(ellipse 50% 25% at 80% 0%, #002040 0%, transparent 55%),
+    radial-gradient(ellipse 40% 20% at 50% 5%, #001a30 0%, transparent 50%),
+    #030712;
 }
 
-/* ── レベル別背景グラデーション ── */
-.bg-level-1 { background: #0f172a; }
-.bg-level-2 { background: linear-gradient(135deg, #0f172a 60%, #1e1040 100%); }
-.bg-level-3 { background: linear-gradient(135deg, #0f172a 30%, #2e1065 70%, #1e1b4b 100%); }
+/* ── 旧レベル別背景（QuizGame互換） ── */
+.bg-level-1   { background: #030712; }
+.bg-level-2   { background: linear-gradient(135deg, #0f172a 60%, #1e1040 100%); }
+.bg-level-3   { background: linear-gradient(135deg, #0f172a 30%, #2e1065 70%, #1e1b4b 100%); }
 .bg-level-max { background: linear-gradient(135deg, #1e1040 0%, #3b0764 50%, #1e1b4b 100%); }
