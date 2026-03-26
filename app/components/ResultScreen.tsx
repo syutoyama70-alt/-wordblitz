@@ -206,12 +206,16 @@ export default function ResultScreen({
       {/* ── アフィリエイト ── */}
       <div className="w-full max-w-sm mb-4 text-center">
         <p className="text-xs text-gray-500 mb-2">英語力をもっと伸ばすなら👇</p>
-        <div className="flex justify-center">
+        <div className="flex justify-center gap-3 flex-wrap">
           <a href="https://px.a8.net/svt/ejp?a8mat=4AZOWS+9QOC36+1SVU+5YRHD" rel="nofollow" target="_blank">
             <img width={200} height={200} alt="" src="https://www20.a8.net/svt/bgt?aid=260326108589&wid=001&eno=01&mid=s00000008409001002000&mc=1" className="rounded-lg border-0" />
           </a>
+          <a href="https://px.a8.net/svt/ejp?a8mat=4AZOWS+A3RVEA+35VG+BXB8X" rel="nofollow" target="_blank">
+            <img width={300} height={250} alt="" src="https://www23.a8.net/svt/bgt?aid=260326108611&wid=001&eno=01&mid=s00000014758002003000&mc=1" className="rounded-lg border-0" />
+          </a>
         </div>
         <img width={1} height={1} src="https://www13.a8.net/0.gif?a8mat=4AZOWS+9QOC36+1SVU+5YRHD" alt="" style={{ display: "block" }} />
+        <img width={1} height={1} src="https://www19.a8.net/0.gif?a8mat=4AZOWS+A3RVEA+35VG+BXB8X" alt="" style={{ display: "block" }} />
       </div>
 
       {/* ── アクションボタン ── */}
