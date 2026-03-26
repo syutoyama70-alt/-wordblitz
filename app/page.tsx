@@ -134,6 +134,7 @@ export default function Home() {
           maxCombo={lastResult.maxCombo} correctCount={lastResult.correctCount}
           wrongCount={lastResult.wrongCount} wrongWords={lastResult.wrongWords}
           bestScore={saved.bestScore ?? 0} isNewRecord={lastResult.isNewRecord}
+          difficulty={quizSettings.difficulty}
           onRestart={() => setScreen("quiz")}
           onReview={() => setScreen("review")}
           onHome={() => setScreen("home")}
