@@ -306,8 +306,8 @@ export const words: Word[] = [
   { id: 2108, english: "ethical", japanese: "倫理的な", level: 2 },
   { id: 2109, english: "explicit", japanese: "明示的な・明確な", level: 2 },
   { id: 2110, english: "implicit", japanese: "暗黙の・含意された", level: 2 },
-  { id: 2111, english: "incentive", japanese: "動機・誘因", level: 2 },
-  { id: 2112, english: "justify", japanese: "正当化する", level: 2 },
+  { id: 2111, english: "intrinsic", japanese: "本質的な・固有の", level: 2 },
+  { id: 2112, english: "scrutinize", japanese: "精査する・詳しく調べる", level: 2 },
   { id: 2113, english: "objective", japanese: "客観的な・目標", level: 2 },
   { id: 2114, english: "perceive", japanese: "知覚する・認識する", level: 2 },
   { id: 2115, english: "relevant", japanese: "関連のある", level: 2 },
@@ -568,7 +568,7 @@ export const words: Word[] = [
   { id: 461, english: "accrual", japanese: "発生主義・累積", level: 3 },
   { id: 462, english: "appropriation", japanese: "充当・流用", level: 3 },
   { id: 463, english: "subrogation", japanese: "代位弁済・代位権", level: 3 },
-  { id: 464, english: "encumbrance", japanese: "担保負担・負担権", level: 3 },
+  { id: 464, english: "hypothecation", japanese: "担保設定・仮説", level: 3 },
   { id: 465, english: "non-disclosure", japanese: "非開示・秘密保持", level: 3 },
   { id: 466, english: "inherent", japanese: "固有の・本質的な", level: 3 },
   { id: 467, english: "enclosure", japanese: "同封物・添付書類", level: 3 },
@@ -600,7 +600,15 @@ export function getWordsByDifficulty(difficulty: 1 | 2 | 3): Word[] {
 }
 
 export function getRandomWrongOptions(correct: Word, allWords: Word[], count = 3): Word[] {
-  const pool = allWords.filter((w) => w.id !== correct.id);
-  const shuffled = pool.sort(() => Math.random() - 0.5);
+  // 同じ英語・日本語の単語を除外（重複単語対策）
+  const pool = allWords.filter(
+    (w) => w.id !== correct.id && w.english !== correct.english && w.japanese !== correct.japanese
+  );
+  // Fisher-Yates シャッフル（偏りのない真のランダム）
+  const shuffled = [...pool];
+  for (let i = shuffled.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [shuffled[i], shuffled[j]] = [shuffled[j], shuffled[i]];
+  }
   return shuffled.slice(0, count);
 }
