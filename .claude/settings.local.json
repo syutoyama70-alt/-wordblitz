@@ -4,7 +4,9 @@
       "Bash(npx create-next-app@latest . --typescript --tailwind --eslint --app --no-src-dir --import-alias \"@/*\" --yes)",
       "Bash(npx tsc:*)",
       "Bash(node:*)",
-      "Bash(wc:*)"
+      "Bash(wc:*)",
+      "Bash(gh auth:*)",
+      "Bash(npx next:*)"
     ]
   }
 }
